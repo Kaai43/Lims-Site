@@ -8,7 +8,7 @@
 }
 
 [data-theme="dark"] {
-  --bg: #121212;
+  --bg: #000000;
   --fg: #ffffff;
   --muted: #2a2a2a;
 }
@@ -65,6 +65,27 @@ body {
   font-size: 13px;
   font-weight: 700;
 }
+
+.logo--lims {
+  width: auto;
+  height: var(--logo-size);
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo__img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.logo__img--escuro { display: none; }
+[data-theme="dark"] .logo__img--claro { display: none; }
+[data-theme="dark"] .logo__img--escuro { display: block; }
 
 /* ---------- Botão de menu (três linhas) ---------- */
 .menu-toggle {
@@ -170,10 +191,11 @@ body {
 }
 
 .pagina-titulo--destaque {
-  font-size: 48px;
+  font-size: 64px;
   line-height: 1.1;
-  margin-left: 64px;
-  margin-bottom: 36px;
+  text-align: center;
+  margin-left: 0;
+  margin-bottom: 40px;
 }
 
 .pesquisadores-lista {
