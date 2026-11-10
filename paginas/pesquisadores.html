@@ -6,7 +6,7 @@
   <title>Pesquisadores — LIMS</title>
   <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="pagina-pesquisadores">
   <!-- Cabeçalho completo (logos, menu e linha): visível no topo e ao rolar para baixo; sobe e some ao rolar para cima -->
   <div class="cabecalho" id="cabecalho" data-topo-visivel="true">
     <header class="topbar">
@@ -22,7 +22,9 @@
           <span class="menu-toggle__linha"></span>
           <span class="menu-toggle__linha"></span>
         </button>
-        <div class="logo" id="logo-right" aria-label="Símbolo direito (placeholder)">LOGO</div>
+        <div class="logo logo--ifpi" id="logo-right" aria-label="IFPI — Instituto Federal do Piauí">
+          <img class="logo__img logo__img--ifpi" src="../imagens/logo ifpi.webp" alt="IFPI">
+        </div>
       </div>
     </header>
 
@@ -57,16 +59,22 @@
     <h1 class="pagina-titulo pagina-titulo--destaque">Pesquisadores</h1>
     <section class="pesquisadores-lista" aria-label="Lista de pesquisadores">
       <article class="pesquisador-card">
+        <img class="pesquisador-card__foto" src="../imagens/Professor Fábio.jpeg" alt="Foto do Professor Fabio de Jesus Lima Gomes">
+        <h2 class="pesquisador-card__nome">Fabio de Jesus Lima Gomes</h2>
+        <p class="pesquisador-card__email">fabio@ifpi.edu.br</p>
+        <p class="pesquisador-card__formacao">Doutorado em Informatica na Educacao (UFRGS)</p>
+      </article>
+      <article class="pesquisador-card">
         <img class="pesquisador-card__foto" src="../imagens/Professor fernando.jpeg" alt="Foto do Professor Fernando Castelo Branco Gonçalves Santana">
         <h2 class="pesquisador-card__nome">Fernando Castelo Branco Gonçalves Santana</h2>
         <p class="pesquisador-card__email">fernandosantana@ifpi.edu.br</p>
         <p class="pesquisador-card__formacao">Mestre em Ciência da Computação</p>
       </article>
       <article class="pesquisador-card">
-        <img class="pesquisador-card__foto" src="../imagens/Professor Fábio.jpeg" alt="Foto do Professor Fabio de Jesus Lima Gomes">
-        <h2 class="pesquisador-card__nome">Fabio de Jesus Lima Gomes</h2>
-        <p class="pesquisador-card__email">fabio@ifpi.edu.br</p>
-        <p class="pesquisador-card__formacao">Doutorado em Informatica na Educacao (UFRGS)</p>
+        <img class="pesquisador-card__foto" src="../imagens/Professor Ricardo.jpg" alt="Foto do Professor Ricardo Martins Ramos">
+        <h2 class="pesquisador-card__nome">Ricardo Martins Ramos</h2>
+        <p class="pesquisador-card__email">ricardo@ifpi.edu.br</p>
+        <p class="pesquisador-card__formacao">Doutorado em Genética e Toxicologia aplicada (ULBRA)</p>
       </article>
     </section>
   </main>

@@ -22,7 +22,9 @@
           <span class="menu-toggle__linha"></span>
           <span class="menu-toggle__linha"></span>
         </button>
-        <div class="logo" id="logo-right" aria-label="Símbolo direito (placeholder)">LOGO</div>
+        <div class="logo logo--ifpi" id="logo-right" aria-label="IFPI — Instituto Federal do Piauí">
+          <img class="logo__img logo__img--ifpi" src="../imagens/logo ifpi.webp" alt="IFPI">
+        </div>
       </div>
     </header>
 
@@ -53,13 +55,30 @@
     </button>
   </div>
 
-  <main class="conteudo">
-    <h1 class="pagina-titulo">Projetos</h1>
-    <p>Conteúdo desta página em construção.</p>
+  <main class="conteudo conteudo--pesquisadores">
+    <h1 class="pagina-titulo pagina-titulo--destaque">Projetos</h1>
+
+    <div class="projetos-menu" role="region" aria-label="Menu de projetos">
+      <button type="button" id="aba-yss" class="projeto-aba"
+              aria-expanded="false" aria-controls="painel-yss" data-projeto-alvo="painel-yss">
+        Your Student Space
+      </button>
+    </div>
+
+    <section id="painel-yss" class="projeto-painel" hidden>
+      <h2 class="projeto-painel__titulo">Your Student Space: plataforma STEAM para alunos da rede pública</h2>
+      <p class="projeto-painel__descricao">Plataforma gratuita e acessível desenvolvida no IFPI para incentivar e ampliar a participação de estudantes de escolas públicas em atividades extracurriculares nas áreas STEAM (Ciência, Tecnologia, Engenharia, Artes e Matemática), reunindo as funções Explorar, Informar e Histórias Inspiradoras.</p>
+      <div class="projeto-painel__links">
+        <a class="projeto-painel__link" href="https://www.instagram.com/your_student_space/" target="_blank" rel="noopener noreferrer">Instagram (@your_student_space)</a>
+        <a class="projeto-painel__link" href="../PDF/dd62-10add-e931-1729486178974.pdf" target="_blank" rel="noopener noreferrer">Abrir apresentação em PDF</a>
+      </div>
+      <embed class="projeto-painel__pdf" src="../PDF/dd62-10add-e931-1729486178974.pdf" type="application/pdf">
+    </section>
   </main>
 
   <script src="../js/scroll.js"></script>
   <script src="../js/theme.js"></script>
   <script src="../js/menu.js"></script>
+  <script src="../js/projetos.js"></script>
 </body>
 </html>
