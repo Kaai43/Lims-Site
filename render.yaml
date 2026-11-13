@@ -3,10 +3,17 @@ services:
     name: lims-ifpi
     runtime: node
     plan: free
-    buildCommand: npm ci && npm run build && npx prisma migrate deploy && npm run db:seed
+    # --include=dev é obrigatório: o build precisa de prisma/tsx/typescript/tailwind,
+    # que são devDependencies. Sem a flag, NODE_ENV=production faz o npm omiti-las
+    # e o build falha em "prisma: not found".
+    buildCommand: npm ci --include=dev && npm run build && npx prisma migrate deploy && npm run db:seed
     startCommand: npm start
     healthCheckPath: /saude
     envVars:
+      # package.json exige node >=24; fixar evita o Render usar um Node antigo
+      # e quebrar o binário nativo do better-sqlite3.
+      - key: NODE_VERSION
+        value: "24"
       - key: NODE_ENV
         value: production
       - key: HOST
