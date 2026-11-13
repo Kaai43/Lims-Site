@@ -1,2 +1,29 @@
 AGENTS.md
 opencode.json
+
+# Node
+node_modules/
+dist/
+*.log
+
+# Ambiente e segredos
+.env
+.env.*
+!.env.example
+
+# Banco SQLite / Prisma
+*.db
+*.db-journal
+*.sqlite
+prisma/dev.db*
+tests/.tmp/
+
+# Artefatos de build (gerados por `npm run build`)
+src/generated/
+public/css/app.css
+public/js/app.js
+public/js/tema-inicial.js
+public/js/htmx.min.js
+
+# Relatórios locais de segurança
+relatorios ataques/

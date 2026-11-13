@@ -1,0 +1,52 @@
+// Prisma 7: a URL do banco fica em prisma.config.ts (não aqui).
+// Site somente leitura: o banco é recriado no build (migrate deploy + seed).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Pesquisador {
+  id        Int     @id @default(autoincrement())
+  slug      String  @unique
+  nome      String
+  email     String?
+  formacao  String
+  area      String?
+  fotoUrl   String?
+  lattesUrl String?
+  ordem     Int     @default(0)
+}
+
+model Projeto {
+  id           Int     @id @default(autoincrement())
+  slug         String  @unique
+  titulo       String
+  resumo       String
+  descricao    String
+  categoria    String // slug kebab-case usado no filtro
+  status       String // "em-andamento" | "concluido"
+  anoInicio    Int?
+  imagemUrl    String?
+  instagramUrl String?
+  pdfUrl       String?
+  ordem        Int     @default(0)
+
+  @@index([categoria])
+}
+
+model Evento {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  titulo    String
+  descricao String
+  data      DateTime
+  local     String
+  linkUrl   String?
+
+  @@index([data])
+}

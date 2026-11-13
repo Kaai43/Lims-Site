@@ -1,0 +1,53 @@
+{
+  "name": "lims-site",
+  "version": "1.0.0",
+  "description": "Site institucional do LIMS — Laboratory of Innovation on Multimedia Systems (IFPI)",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "npm run build:assets && tsx watch --env-file-if-exists=.env src/server.ts",
+    "dev:css": "tailwindcss -i src/styles/app.css -o public/css/app.css --watch",
+    "build": "prisma generate && tsc -p tsconfig.build.json && npm run build:assets",
+    "build:assets": "npm run build:css && npm run build:client && npm run build:htmx",
+    "build:css": "tailwindcss -i src/styles/app.css -o public/css/app.css --minify",
+    "build:client": "tsc -p tsconfig.client.json",
+    "build:htmx": "node -e \"require('node:fs').copyFileSync('node_modules/htmx.org/dist/htmx.min.js','public/js/htmx.min.js')\"",
+    "start": "node dist/server.js",
+    "test": "node --import tsx --test --test-concurrency=1 \"tests/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.client.json",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@fastify/cookie": "11.1.5",
+    "@fastify/csrf-protection": "8.0.2",
+    "@fastify/helmet": "13.2.0",
+    "@fastify/rate-limit": "11.2.2",
+    "@fastify/static": "10.1.11",
+    "@prisma/adapter-better-sqlite3": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "fastify": "5.12.8",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.5",
+    "@types/node": "24.19.2",
+    "htmx.org": "2.0.11",
+    "prisma": "7.10.1",
+    "tailwindcss": "4.3.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  },
+  "allowScripts": {
+    "better-sqlite3@12.11.1": true,
+    "prisma@7.10.1": true,
+    "@prisma/engines@7.10.1": true,
+    "esbuild@0.28.2": true,
+    "@parcel/watcher@2.6.0": true
+  }
+}
