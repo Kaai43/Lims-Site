@@ -76,9 +76,9 @@ export async function popularBanco(db: Db): Promise<void> {
     });
   }
 
-  // Remove evento fictício anterior de amostragem caso exista no banco local.
+  // Remove eventos fictícios anteriores, caso ainda existam em bancos locais.
   await db.evento.deleteMany({
-    where: { slug: 'mostra-projetos-lims-2026' },
+    where: { slug: { in: ['mostra-projetos-lims-2026', 'lancamento-your-student-space'] } },
   });
 
   const eventos = [
@@ -90,15 +90,6 @@ export async function popularBanco(db: Db): Promise<void> {
       data: new Date('2026-10-06T08:00:00-03:00'),
       local: 'IFPI — Campus Teresina Central · Teresina, PI',
       linkUrl: 'https://seminova2026.com.br/',
-    },
-    {
-      slug: 'lancamento-your-student-space',
-      titulo: 'Apresentação do Projeto Your Student Space',
-      descricao:
-        'Divulgação institucional da plataforma STEAM voltada a estudantes de escolas públicas.',
-      data: new Date('2025-10-15T14:00:00-03:00'),
-      local: 'IFPI — Teresina, PI',
-      linkUrl: 'https://www.instagram.com/your_student_space/',
     },
   ];
 
