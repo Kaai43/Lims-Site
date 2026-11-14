@@ -1,4 +1,5 @@
 import { html, raw, type SafeHtml } from './html.js';
+import { comVersao } from '../lib/versao-assets.js';
 
 export interface ItemNav {
   rota: string;
@@ -45,10 +46,10 @@ export function layout({ titulo, descricao, rotaAtiva, conteudo }: OpcoesLayout)
   <meta name="theme-color" content="#2f9e41">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="/imagens/ifpi.png" type="image/png">
-  <link rel="stylesheet" href="/css/app.css">
-  <script src="/js/tema-inicial.js"></script>
-  <script src="/js/htmx.min.js" defer></script>
-  <script src="/js/app.js" type="module"></script>
+  <link rel="stylesheet" href="${comVersao('/css/app.css')}">
+  <script src="${comVersao('/js/tema-inicial.js')}"></script>
+  <script src="${comVersao('/js/htmx.min.js')}" defer></script>
+  <script src="${comVersao('/js/app.js')}" type="module"></script>
 </head>
 <body class="corpo">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
