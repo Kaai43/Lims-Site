@@ -129,3 +129,13 @@ test('GET /robots.txt e /.well-known/security.txt respondem 200', async () => {
   assert.equal(r1.statusCode, 200);
   assert.equal(r2.statusCode, 200);
 });
+
+test('atalho lims.html e scripts de inicialização automática existem', async () => {
+  const { existsSync, readFileSync } = await import('node:fs');
+  assert.equal(existsSync('lims.html'), true);
+  assert.match(readFileSync('lims.html', 'utf8'), /http:\/\/localhost:3000/);
+  assert.equal(existsSync('automacao/iniciar-servidor.ps1'), true);
+  assert.equal(existsSync('automacao/iniciar-invisivel.vbs'), true);
+  assert.equal(existsSync('automacao/instalar-inicializacao.ps1'), true);
+  assert.equal(existsSync('automacao/desinstalar-inicializacao.ps1'), true);
+});

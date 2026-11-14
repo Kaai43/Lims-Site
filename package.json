@@ -21,7 +21,9 @@
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.client.json",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
-    "db:seed": "prisma generate && tsx banco-de-dados/popular.ts"
+    "db:seed": "prisma generate && tsx banco-de-dados/popular.ts",
+    "autostart:instalar": "powershell -NoProfile -ExecutionPolicy Bypass -File automacao/instalar-inicializacao.ps1",
+    "autostart:remover": "powershell -NoProfile -ExecutionPolicy Bypass -File automacao/desinstalar-inicializacao.ps1"
   },
   "dependencies": {
     "@fastify/cookie": "11.1.5",

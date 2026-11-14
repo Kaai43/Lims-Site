@@ -25,6 +25,7 @@ LIMS/
 │   ├── navegador/              # Scripts TypeScript do cliente (menu, tema e paletas do modo escuro)
 │   └── utilitarios/            # Versionamento de assets por hash
 ├── arquivos-publicos/          # Imagens, PDFs e CSS/JS compilados servidos pelo Fastify
+├── automacao/                  # Scripts para ligar o servidor automaticamente ao iniciar o Windows
 ├── banco-de-dados/             # Schema Prisma, migrations SQL e script `popular.ts` (seed)
 ├── testes/                     # Suíte de testes automatizados (`node:test`)
 └── documentacao/               # Planos (`planos/`) e relatórios (`relatorios/`)
@@ -68,6 +69,8 @@ npm run dev
 | `npm run typecheck` | Verifica tipos do servidor e do cliente (`tsc --noEmit`) |
 | `npm run db:deploy` | Aplica migrations pendentes no SQLite (`banco-de-dados/`) |
 | `npm run db:seed` | Popula o banco de forma idempotente (`banco-de-dados/popular.ts`) |
+| `npm run autostart:instalar` | Configura o Windows para subir `npm run dev` oculto sempre que o PC ligar |
+| `npm run autostart:remover` | Remove a inicialização automática do Windows |
 
 ---
 
