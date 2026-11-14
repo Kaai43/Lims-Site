@@ -76,14 +76,20 @@ export async function popularBanco(db: Db): Promise<void> {
     });
   }
 
+  // Remove evento fictício anterior de amostragem caso exista no banco local.
+  await db.evento.deleteMany({
+    where: { slug: 'mostra-projetos-lims-2026' },
+  });
+
   const eventos = [
     {
-      slug: 'mostra-projetos-lims-2026',
-      titulo: 'Mostra de Projetos e Protótipos do LIMS',
+      slug: 'seminova-2026-teresina-info',
+      titulo: 'SEMINOVA 2026 — V Teresina Info, II FEPICE e I IdeiaLab',
       descricao:
-        'Apresentação aberta dos projetos de pesquisa em sistemas multimídia, robótica educacional e plataformas STEAM desenvolvidos no laboratório.',
-      data: new Date('2026-12-10T14:00:00-03:00'),
-      local: 'IFPI — Campus Teresina Central · Laboratório LIMS',
+        'Semana de Inovação promovida pelo IFPI — Campus Teresina Central, reunindo o V Teresina Info, a II Feira Piauiense de Ciências e Engenharia (FEPICE) e o I IdeiaLab em palestras, oficinas tecnológicas, mostras científicas e desafios de inovação.',
+      data: new Date('2026-10-06T08:00:00-03:00'),
+      local: 'IFPI — Campus Teresina Central · Teresina, PI',
+      linkUrl: 'https://seminova2026.com.br/',
     },
     {
       slug: 'lancamento-your-student-space',

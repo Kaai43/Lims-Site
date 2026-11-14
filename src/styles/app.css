@@ -20,7 +20,8 @@
   --sombra: 0 6px 20px -4px rgba(15, 23, 18, 0.08);
 }
 
-[data-theme="dark"] {
+[data-theme="dark"],
+[data-theme="dark"][data-dark-palette="verde"] {
   --bg: #0b110d;
   --bg-card: #121b15;
   --bg-elevado: #18251d;
@@ -33,6 +34,38 @@
   --ifpi-vermelho: #f87171;
   --circuito: rgba(57, 181, 78, 0.09);
   --sombra: 0 8px 28px -6px rgba(0, 0, 0, 0.55);
+}
+
+/* Esqueleto "Trocar de Cores" — variante escura 2: Preto puro (OLED) */
+[data-theme="dark"][data-dark-palette="preto"] {
+  --bg: #000000;
+  --bg-card: #0a0a0a;
+  --bg-elevado: #141414;
+  --fg: #f5f5f5;
+  --fg-suave: #a3a3a3;
+  --borda: #262626;
+  --borda-forte: #e5e5e5;
+  --ifpi-verde: #4ade80;
+  --ifpi-verde-vivo: #86efac;
+  --ifpi-vermelho: #f87171;
+  --circuito: rgba(255, 255, 255, 0.06);
+  --sombra: 0 8px 28px -6px rgba(0, 0, 0, 0.85);
+}
+
+/* Esqueleto "Trocar de Cores" — variante escura 3: Azul robótico */
+[data-theme="dark"][data-dark-palette="azul"] {
+  --bg: #070d19;
+  --bg-card: #0e1729;
+  --bg-elevado: #15223b;
+  --fg: #eaf2ff;
+  --fg-suave: #9cb3d9;
+  --borda: #1f3356;
+  --borda-forte: #38bdf8;
+  --ifpi-verde: #38bdf8;
+  --ifpi-verde-vivo: #7dd3fc;
+  --ifpi-vermelho: #f87171;
+  --circuito: rgba(56, 189, 248, 0.09);
+  --sombra: 0 8px 28px -6px rgba(2, 6, 23, 0.7);
 }
 
 *, *::before, *::after {
@@ -218,25 +251,27 @@ html {
 }
 
 .ifpi {
-  display: none;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  background: #ffffff;
+  border: 1px solid var(--borda);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-@media (min-width: 640px) {
-  .ifpi {
-    display: inline-flex;
-  }
+.ifpi:hover {
+  border-color: var(--ifpi-verde);
+  transform: translateY(-1px);
 }
 
 .ifpi__img {
-  height: 36px;
+  height: 40px;
   width: auto;
   object-fit: contain;
+  display: block;
 }
-
-.ifpi__img--escuro { display: none; }
-[data-theme="dark"] .ifpi__img--claro { display: none; }
-[data-theme="dark"] .ifpi__img--escuro { display: block; }
 
 .botao-icone {
   width: 2.5rem;
@@ -523,6 +558,50 @@ html {
   object-position: center top;
   border-radius: 0.375rem;
   border: 1px solid var(--borda);
+}
+
+/* Pesquisadores: ao passar o mouse (ou focar), a foto aparece inteira sem cortes */
+.card__midia {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.375rem;
+  border: 1px solid var(--borda);
+  background: var(--bg-elevado);
+}
+
+.card__foto--pesquisador {
+  border: 0;
+  border-radius: 0;
+  height: 280px;
+  display: block;
+  transition: height 0.3s ease, transform 0.3s ease;
+}
+
+.card__dica {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  color: var(--fg-suave);
+  border: 1px solid var(--borda);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.card--pesquisador:hover .card__foto--pesquisador,
+.card--pesquisador:focus-within .card__foto--pesquisador {
+  height: 380px;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.card--pesquisador:hover .card__dica,
+.card--pesquisador:focus-within .card__dica {
+  opacity: 0;
 }
 
 .card__rodape {

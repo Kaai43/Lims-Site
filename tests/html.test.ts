@@ -44,6 +44,8 @@ test('layout marca a rota ativa, define idioma e não tem script inline', () => 
   assert.match(pagina, /<a[^>]*href="\/projetos"[^>]*aria-current="page"/);
   assert.match(pagina, /class="skip-link"/);
   assert.match(pagina, /<title>Projetos — LIMS · IFPI<\/title>/);
+  assert.match(pagina, /src="\/imagens\/ifpi\.png"/);
+  assert.doesNotMatch(pagina, /ifpi-branco\.png/);
   // CSP proíbe script inline: todo <script> precisa de src.
   for (const tag of pagina.match(/<script[^>]*>/g) ?? []) {
     assert.match(tag, /src="\/js\//);
@@ -55,4 +57,16 @@ test('layout escapa o título vindo de dados', () => {
     layout({ titulo: '<x>', descricao: 'd', rotaAtiva: '/', conteudo: html`` }),
   );
   assert.match(pagina, /<title>&lt;x&gt; — LIMS · IFPI<\/title>/);
+});
+
+test('esqueleto Trocar de Cores valida as 3 paletas escuras (verde, preto, azul)', async () => {
+  const { PALETAS_ESCURAS, PALETA_ESCURA_PADRAO, ehPaletaEscuraValida } = await import(
+    '../src/client/paleta-escura.js'
+  );
+  assert.deepEqual(PALETAS_ESCURAS, ['verde', 'preto', 'azul']);
+  assert.equal(PALETA_ESCURA_PADRAO, 'verde');
+  assert.equal(ehPaletaEscuraValida('verde'), true);
+  assert.equal(ehPaletaEscuraValida('preto'), true);
+  assert.equal(ehPaletaEscuraValida('azul'), true);
+  assert.equal(ehPaletaEscuraValida('roxo'), false);
 });

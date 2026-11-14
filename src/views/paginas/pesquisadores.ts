@@ -26,9 +26,12 @@ export function paginaPesquisadores(pesquisadores: readonly PesquisadorView[]): 
       <section class="secao">
         <div class="container grade-cards grade-cards--3" aria-label="Lista de pesquisadores">
           ${pesquisadores.map(
-            (p) => html`<article class="card">
+            (p) => html`<article class="card card--pesquisador">
               ${p.fotoUrl
-                ? html`<img class="card__foto" src="${p.fotoUrl}" alt="Foto de ${p.nome}" loading="lazy" width="280" height="260">`
+                ? html`<div class="card__midia">
+                    <img class="card__foto card__foto--pesquisador" src="${p.fotoUrl}" alt="Foto de ${p.nome}" loading="lazy" width="280" height="320">
+                    <span class="card__dica" aria-hidden="true">Passe o mouse para ver inteira</span>
+                  </div>`
                 : null}
               ${p.area ? html`<span class="tag">${p.area}</span>` : null}
               <h2 class="card__titulo">${p.nome}</h2>

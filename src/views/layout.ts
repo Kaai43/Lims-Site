@@ -44,7 +44,7 @@ export function layout({ titulo, descricao, rotaAtiva, conteudo }: OpcoesLayout)
   <meta name="description" content="${descricao}">
   <meta name="theme-color" content="#2f9e41">
   <meta name="color-scheme" content="light dark">
-  <link rel="icon" href="/imagens/ifpi.webp" type="image/webp">
+  <link rel="icon" href="/imagens/ifpi.png" type="image/png">
   <link rel="stylesheet" href="/css/app.css">
   <script src="/js/tema-inicial.js"></script>
   <script src="/js/htmx.min.js" defer></script>
@@ -84,8 +84,7 @@ export function layout({ titulo, descricao, rotaAtiva, conteudo }: OpcoesLayout)
           <span class="menu-toggle__linha"></span>
         </button>
         <a class="ifpi" href="https://www.ifpi.edu.br/" rel="noopener noreferrer" target="_blank" aria-label="Portal do IFPI (abre em nova aba)">
-          <img class="ifpi__img ifpi__img--claro" src="/imagens/ifpi.webp" alt="" width="120" height="40">
-          <img class="ifpi__img ifpi__img--escuro" src="/imagens/ifpi-branco.png" alt="" width="120" height="40">
+          <img class="ifpi__img" src="/imagens/ifpi.png" alt="Instituto Federal do Piauí" width="60" height="48">
         </a>
       </div>
     </div>

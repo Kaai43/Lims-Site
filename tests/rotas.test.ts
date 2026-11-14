@@ -64,6 +64,8 @@ test('GET /pesquisadores lista do banco e escapa HTML malicioso', async () => {
   assert.match(res.body, /Fabio de Jesus Lima Gomes/);
   assert.match(res.body, /Fernando Castelo Branco Gonçalves Santana/);
   assert.match(res.body, /Ricardo Martins Ramos/);
+  assert.match(res.body, /card--pesquisador/);
+  assert.match(res.body, /card__foto--pesquisador/);
   assert.match(res.body, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
   assert.doesNotMatch(res.body, /<script>alert\(1\)<\/script>/);
 });
@@ -89,10 +91,17 @@ test('GET /projetos com categoria inválida → 400', async () => {
   assert.equal(res.statusCode, 400);
 });
 
-test('GET /eventos aceita proximos/anteriores, suporta HTMX e rejeita período inválido com 400', async () => {
+test('GET /eventos inclui SEMINOVA 2026 (Teresina Info), remove mostra antiga e valida período', async () => {
+  const padrao = await app.inject({ method: 'GET', url: '/eventos' });
+  assert.equal(padrao.statusCode, 200);
+  assert.match(padrao.body, /seminova2026\.com\.br/);
+  assert.match(padrao.body, /Teresina Info/);
+  assert.doesNotMatch(padrao.body, /Mostra de Projetos e Protótipos do LIMS/);
+
   const ok = await app.inject({ method: 'GET', url: '/eventos?periodo=anteriores' });
   assert.equal(ok.statusCode, 200);
   assert.match(ok.body, /<!DOCTYPE html>/);
+  assert.match(ok.body, /seminova2026\.com\.br/);
 
   const hx = await app.inject({
     method: 'GET',

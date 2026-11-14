@@ -23,6 +23,7 @@ src/generated/
 public/css/app.css
 public/js/app.js
 public/js/tema-inicial.js
+public/js/paleta-escura.js
 public/js/htmx.min.js
 
 # Relatórios locais de segurança

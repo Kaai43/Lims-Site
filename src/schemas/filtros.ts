@@ -11,5 +11,5 @@ export const esquemaFiltroProjetos = z.object({
 });
 
 export const esquemaFiltroEventos = z.object({
-  periodo: z.enum(['proximos', 'anteriores']).default('proximos'),
+  periodo: z.enum(['proximos', 'anteriores']).optional(),
 });

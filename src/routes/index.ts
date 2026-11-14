@@ -69,8 +69,13 @@ export async function registrarTodasRotas(app: FastifyInstance): Promise<void> {
   });
 
   app.get('/eventos', async (req, reply) => {
-    const { periodo } = esquemaFiltroEventos.parse(req.query);
-    const eventos = await listarEventos(app.db, periodo);
+    const { periodo: periodoPedido } = esquemaFiltroEventos.parse(req.query);
+    let periodo = periodoPedido ?? 'proximos';
+    let eventos = await listarEventos(app.db, periodo);
+    if (!periodoPedido && eventos.length === 0) {
+      periodo = 'anteriores';
+      eventos = await listarEventos(app.db, 'anteriores');
+    }
     const ehHtmx = req.headers['hx-request'] === 'true';
     const htmlSaida = ehHtmx ? parcialEventos(eventos, periodo) : paginaEventos(eventos, periodo);
     return reply.type('text/html; charset=utf-8').send(renderizar(htmlSaida));
