@@ -18,7 +18,7 @@ export function paginaPesquisadores(pesquisadores: readonly PesquisadorView[]): 
     rotaAtiva: '/pesquisadores',
     conteudo: html`
       ${cabecalhoPagina(
-        '02 — CORPO CIENTÍFICO',
+        '03 — CORPO CIENTÍFICO',
         'Pesquisadores',
         'Docentes do Instituto Federal do Piauí que conduzem as pesquisas e projetos do laboratório.',
       )}

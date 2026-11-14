@@ -13,7 +13,7 @@ export function paginaProjetos(
     rotaAtiva: '/projetos',
     conteudo: html`
       ${cabecalhoPagina(
-        '03 — PESQUISA & EXTENSÃO',
+        '02 — PESQUISA & EXTENSÃO',
         'Projetos',
         'Plataformas, protótipos e ações desenvolvidas pela equipe do LIMS no IFPI.',
       )}
