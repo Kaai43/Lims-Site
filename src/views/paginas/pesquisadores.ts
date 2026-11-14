@@ -29,7 +29,7 @@ export function paginaPesquisadores(pesquisadores: readonly PesquisadorView[]): 
             (p) => html`<article class="card card--pesquisador">
               ${p.fotoUrl
                 ? html`<div class="card__midia">
-                    <img class="card__foto card__foto--pesquisador" src="${p.fotoUrl}" alt="Foto de ${p.nome}" loading="lazy" width="280" height="320">
+                    <img class="card__foto card__foto--pesquisador" src="${p.fotoUrl}" alt="Foto de ${p.nome}" loading="lazy" width="300" height="400">
                   </div>`
                 : null}
               ${p.area ? html`<span class="tag">${p.area}</span>` : null}

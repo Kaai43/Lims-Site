@@ -560,9 +560,12 @@ html {
   border: 1px solid var(--borda);
 }
 
-/* Pesquisadores: a foto aparece inteira desde o início, sem corte.
-   `contain` preserva a proporção original; a área livre nas laterais usa o
-   fundo do cartão, então proporções diferentes convivem sem desalinhar a grade. */
+/* Pesquisadores: enquadramento padronizado em retrato 3:4.
+   A caixa tem sempre a mesma proporção, então os três cartões alinham mesmo com
+   fotos de proporções diferentes (0,75 / 0,87 / 1,06). O recorte é só lateral —
+   o `object-position` vertical em 30% mantém o topo da cabeça e o rosto na parte
+   de cima do quadro, que é onde estão os rostos nestas fotos.
+   Os arquivos originais não são alterados. */
 .card__midia {
   position: relative;
   overflow: hidden;
@@ -574,9 +577,11 @@ html {
 .card__foto--pesquisador {
   border: 0;
   border-radius: 0;
-  height: 320px;
-  object-fit: contain;
-  object-position: center center;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 30%;
   display: block;
 }
 
