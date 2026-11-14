@@ -1,3 +1,5 @@
+import { pathToFileURL } from 'node:url';
+
 import { criarPrisma, type Db } from '../src/db.js';
 
 export async function popularBanco(db: Db): Promise<void> {
@@ -103,7 +105,12 @@ export async function popularBanco(db: Db): Promise<void> {
   }
 }
 
-const executadoDireto = import.meta.url === `file://${process.argv[1]?.replace(/\\/g, '/')}`;
+// Comparação via pathToFileURL: concatenar "file://" com process.argv[1] gera
+// "file://C:/..." no Windows, enquanto import.meta.url é "file:///C:/...".
+// A comparação antiga nunca era verdadeira e o seed saía em silêncio, deixando
+// o banco com as tabelas criadas e nenhuma linha.
+const executadoDireto =
+  process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
 if (executadoDireto) {
   const url = process.env.DATABASE_URL ?? 'file:./prisma/dev.db';
   const db = criarPrisma(url);
