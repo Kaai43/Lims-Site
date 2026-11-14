@@ -32,8 +32,7 @@ export function paginaInicio({ destaques, contagem }: DadosInicio): SafeHtml {
           </div>
 
           <aside class="hero__painel" aria-label="Identidade visual e indicadores do LIMS">
-            <img class="hero__logo hero__logo--claro" src="/imagens/lims-claro.jpg" alt="Logotipo do LIMS" width="320" height="140">
-            <img class="hero__logo hero__logo--escuro" src="/imagens/lims-escuro.jpeg" alt="Logotipo do LIMS" width="320" height="140">
+            <img class="hero__logo" src="/imagens/lims-logo.png" alt="Logotipo do LIMS" width="320" height="140">
             <div class="metricas">
               <div>
                 <strong>${contagem.pesquisadores}</strong>

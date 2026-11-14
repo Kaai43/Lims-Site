@@ -63,12 +63,7 @@ export function layout({ titulo, descricao, rotaAtiva, conteudo }: OpcoesLayout)
   <header class="topo" id="topo">
     <div class="container topo__interno">
       <a class="marca" href="/" aria-label="LIMS — página inicial">
-        <img class="marca__img marca__img--claro" src="/imagens/lims-claro.jpg" alt="" width="132" height="48">
-        <img class="marca__img marca__img--escuro" src="/imagens/lims-escuro.jpeg" alt="" width="132" height="48">
-        <span class="marca__texto">
-          <strong>LIMS</strong>
-          <small>Laboratory of Innovation on Multimedia Systems</small>
-        </span>
+        <img class="marca__img" src="/imagens/lims-logo.png" alt="" width="96" height="42">
       </a>
 
       <nav class="nav" aria-label="Menu principal">
