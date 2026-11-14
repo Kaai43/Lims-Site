@@ -4,29 +4,40 @@ Site institucional do **Laboratory of Innovation on Multimedia Systems (LIMS)**,
 
 ---
 
-## Stack tecnológica
+## Organização das pastas (em português)
 
-| Camada | Tecnologia |
-| --- | --- |
-| Linguagem | TypeScript (`strict`, ESM) |
-| Servidor HTTP | Node.js + Fastify 5 |
-| Segurança HTTP | `@fastify/helmet` (CSP restritiva), `@fastify/rate-limit`, `@fastify/csrf-protection` |
-| Validação de borda | Zod 4 |
-| Banco de dados | SQLite + Prisma ORM 7 (`@prisma/adapter-better-sqlite3`) |
-| Front-end | HTML renderizado no servidor (escape automático) + Tailwind CSS 4 + HTMX 2 vendorizado |
-| Testes | `node:test` |
+Toda a árvore do projeto foi nomeada em português para fácil identificação:
+
+```
+LIMS/
+├── lims.html                   # Atalho rápido: clique duas vezes para abrir o site
+├── codigo-fonte/               # Código TypeScript do servidor e do navegador
+│   ├── servidor.ts             # Ponto de entrada (sobe a porta HTTP)
+│   ├── aplicacao.ts            # Montagem do Fastify + plugins + rotas
+│   ├── configuracao.ts         # Leitura e validação de variáveis de ambiente (Zod)
+│   ├── banco.ts                # Conexão Prisma 7 + SQLite
+│   ├── plugins/                # Segurança (Helmet/CSP, Rate-limit, CSRF), Prisma e estáticos
+│   ├── rotas/                  # Rotas HTTP (/, /laboratorio, /projetos, /pesquisadores, /eventos, /localizacoes)
+│   ├── servicos/               # Consultas parametrizadas ao banco de dados
+│   ├── validacoes/             # Esquemas Zod de validação de parâmetros
+│   ├── telas/                  # Motor HTML com escape automático, layout, páginas e parciais HTMX
+│   ├── estilos/                # Folha de estilos Tailwind CSS v4 (identidade IFPI + robótica)
+│   ├── navegador/              # Scripts TypeScript do cliente (menu, tema e paletas do modo escuro)
+│   └── utilitarios/            # Versionamento de assets por hash
+├── arquivos-publicos/          # Imagens, PDFs e CSS/JS compilados servidos pelo Fastify
+├── banco-de-dados/             # Schema Prisma, migrations SQL e script `popular.ts` (seed)
+├── testes/                     # Suíte de testes automatizados (`node:test`)
+└── documentacao/               # Planos (`planos/`) e relatórios (`relatorios/`)
+```
 
 ---
 
-## Esqueleto de segurança (defesa em profundidade)
+## Como abrir com o `lims.html`
 
-1. **CSP restritiva (`default-src 'self'`)**: scripts, estilos, fontes e imagens vêm exclusivamente do próprio servidor (`public/`). Nenhum CDN externo e nenhum `<script>` inline.
-2. **Escape por padrão (`src/views/html.ts`)**: toda interpolação em `` html`...` `` escapa `& < > " ' \``.
-3. **Consultas parametrizadas (`src/services/conteudo.ts`)**: somente a API tipada do Prisma; `$queryRawUnsafe` e `$executeRawUnsafe` são proibidos.
-4. **Validação na borda (`src/schemas/filtros.ts`)**: parâmetros de query validados com Zod antes de chegar aos serviços; entradas inválidas retornam `400`.
-5. **Superfície somente leitura**: o site é de divulgação (sem login e sem painel admin). Métodos diferentes de `GET`/`HEAD` recebem `405`. O plugin `@fastify/csrf-protection` já está registrado para proteger eventuais rotas futuras de escrita.
-6. **Rate limit e limites de payload**: proteção por IP (`@fastify/rate-limit`) e `bodyLimit` de 16 KB.
-7. **Erros sem vazamento**: respostas `4xx`/`5xx` usam páginas estáticas genéricas, sem expor stack trace ou mensagens internas.
+O arquivo [`lims.html`](lims.html) na raiz funciona como lançador inteligente:
+1. Ao clicar duas vezes nele, ele verifica automaticamente se o servidor local (`http://localhost:3000`) está ativo.
+2. **Se o servidor estiver ligado**, ele redireciona você imediatamente para o site.
+3. **Se o servidor estiver desligado**, ele exibe um painel no estilo do LIMS e fica aguardando: assim que você rodar `npm run dev` no terminal, a página redireciona sozinha.
 
 ---
 
@@ -50,13 +61,13 @@ npm run dev
 
 | Comando | Descrição |
 | --- | --- |
-| `npm run dev` | Compila assets e sobe o servidor em modo watch |
-| `npm run build` | Gera o cliente Prisma, compila TypeScript (back e front) e minifica o CSS |
-| `npm start` | Executa a versão compilada (`dist/server.js`) |
-| `npm test` | Executa a suíte de testes (`node:test`) |
+| `npm run dev` | Compila assets e sobe o servidor em modo watch (`codigo-fonte/servidor.ts`) |
+| `npm run build` | Gera o cliente Prisma, compila TypeScript (`compilado/`) e minifica o CSS |
+| `npm start` | Executa a versão compilada (`compilado/servidor.js`) |
+| `npm test` | Executa a suíte de testes (`testes/**/*.test.ts`) |
 | `npm run typecheck` | Verifica tipos do servidor e do cliente (`tsc --noEmit`) |
-| `npm run db:deploy` | Aplica migrations pendentes no SQLite |
-| `npm run db:seed` | Popula o banco de forma idempotente (`upsert` por `slug`) |
+| `npm run db:deploy` | Aplica migrations pendentes no SQLite (`banco-de-dados/`) |
+| `npm run db:seed` | Popula o banco de forma idempotente (`banco-de-dados/popular.ts`) |
 
 ---
 
@@ -64,11 +75,9 @@ npm run dev
 
 O arquivo [`render.yaml`](render.yaml) configura o serviço web no plano gratuito do Render:
 
-- **Build:** `npm ci && npm run build && npx prisma migrate deploy && npm run db:seed`
+- **Build:** `npm ci --include=dev && npm run build && npx prisma migrate deploy && npm run db:seed`
 - **Start:** `npm start`
 - **Health check:** `/saude`
-
-> **Nota sobre o plano gratuito do Render:** o disco é efêmero e a instância hiberna após inatividade (o primeiro acesso após hibernação pode levar ~30s). Como o site é **somente leitura**, o banco SQLite é recriado e populado automaticamente a cada build sem perda de dados. Lembre-se de desativar o GitHub Pages nas configurações do repositório caso utilize apenas o Render.
 
 ---
 

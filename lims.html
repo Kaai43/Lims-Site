@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abrir LIMS · IFPI</title>
+  <link rel="icon" href="arquivos-publicos/imagens/ifpi.png" type="image/png">
+  <style>
+    :root {
+      --bg: #0b110d;
+      --card: #121b15;
+      --borda: #24382b;
+      --fg: #edf5ef;
+      --suave: #a8bdb0;
+      --verde: #2f9e41;
+      --verde-vivo: #4ade80;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(to right, rgba(57, 181, 78, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(57, 181, 78, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+      color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    .painel {
+      width: 100%;
+      max-width: 540px;
+      background: var(--card);
+      border: 1px solid var(--borda);
+      border-top: 4px solid var(--verde);
+      border-radius: 0.65rem;
+      padding: 2rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+    }
+    .topo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .topo img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+    }
+    .ifpi-box {
+      background: #ffffff;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      display: inline-flex;
+    }
+    .rotulo {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--verde-vivo);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 0.4rem;
+    }
+    h1 {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 1.45rem;
+      margin: 0 0 0.6rem;
+    }
+    p {
+      margin: 0 0 1rem;
+      color: var(--suave);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.4rem;
+      background: rgba(47, 158, 65, 0.12);
+      border: 1px solid var(--borda);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+    .led {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #facc15;
+      box-shadow: 0 0 8px #facc15;
+      flex-shrink: 0;
+    }
+    .led.online {
+      background: var(--verde-vivo);
+      box-shadow: 0 0 10px var(--verde-vivo);
+    }
+    .acoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.2rem;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0.4rem;
+      background: var(--verde);
+      color: #ffffff;
+      border: 1px solid var(--verde);
+      cursor: pointer;
+    }
+    .btn:hover { background: #237a31; }
+    .btn-sec {
+      background: transparent;
+      border-color: var(--borda);
+      color: var(--fg);
+    }
+    code {
+      display: block;
+      padding: 0.7rem 0.9rem;
+      background: #070b08;
+      border: 1px solid var(--borda);
+      border-radius: 0.375rem;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      color: var(--verde-vivo);
+      font-size: 0.85rem;
+      user-select: all;
+    }
+    .dica {
+      display: none;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--borda);
+    }
+    .dica.visivel { display: block; }
+  </style>
+</head>
+<body>
+  <main class="painel">
+    <div class="topo">
+      <img src="arquivos-publicos/imagens/lims-logo.png" alt="LIMS">
+      <span class="ifpi-box">
+        <img src="arquivos-publicos/imagens/ifpi.png" alt="IFPI">
+      </span>
+    </div>
+
+    <p class="rotulo">// ATALHO RÁPIDO · SYS://LIMS.IFPI</p>
+    <h1>Laboratory of Innovation on Multimedia Systems</h1>
+    <p>Este lançador conecta você automaticamente ao servidor TypeScript/Fastify do LIMS.</p>
+
+    <div class="status" role="status" aria-live="polite">
+      <span class="led" id="led"></span>
+      <span id="mensagem">Procurando servidor local em http://localhost:3000...</span>
+    </div>
+
+    <div class="acoes">
+      <a class="btn" id="btn-abrir" href="http://localhost:3000/">Ir para http://localhost:3000</a>
+      <button type="button" class="btn btn-sec" id="btn-tentar">Verificar novamente</button>
+    </div>
+
+    <div class="dica" id="dica">
+      <p><strong>O servidor local ainda não está ligado.</strong> Como o site agora usa banco de dados SQLite e TypeScript em tempo real, basta rodar no terminal da pasta do projeto:</p>
+      <code>npm run dev</code>
+      <p style="margin-top:0.6rem;margin-bottom:0">Assim que o servidor subir, esta página redireciona você sozinha!</p>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var ALVO = 'http://localhost:3000';
+      var led = document.getElementById('led');
+      var msg = document.getElementById('mensagem');
+      var dica = document.getElementById('dica');
+      var btnTentar = document.getElementById('btn-tentar');
+
+      function redirecionar() {
+        led.className = 'led online';
+        msg.textContent = 'Servidor online! Redirecionando para o site...';
+        window.location.replace(ALVO + '/');
+      }
+
+      function verificar() {
+        msg.textContent = 'Verificando servidor em ' + ALVO + '...';
+        // Probe por imagem do próprio servidor: funciona mesmo quando aberto via file:// sem bloqueio de CORS.
+        var img = new Image();
+        var concluido = false;
+        var timer = setTimeout(function () {
+          if (concluido) return;
+          concluido = true;
+          msg.textContent = 'Servidor local desligado (porta 3000).';
+          dica.className = 'dica visivel';
+        }, 1500);
+
+        img.onload = function () {
+          if (concluido) return;
+          concluido = true;
+          clearTimeout(timer);
+          redirecionar();
+        };
+        img.onerror = function () {
+          if (concluido) return;
+          concluido = true;
+          clearTimeout(timer);
+          msg.textContent = 'Aguardando você iniciar o servidor (npm run dev)...';
+          dica.className = 'dica visivel';
+        };
+        img.src = ALVO + '/imagens/ifpi.png?t=' + Date.now();
+      }
+
+      btnTentar.addEventListener('click', verificar);
+      verificar();
+      // Continua tentando a cada 2.5s para redirecionar assim que `npm run dev` for iniciado.
+      setInterval(verificar, 2500);
+    })();
+  </script>
+</body>
+</html>

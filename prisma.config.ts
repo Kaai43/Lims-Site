@@ -2,12 +2,12 @@ import { defineConfig } from 'prisma/config';
 
 // Prisma 7 não carrega .env sozinho. Em dev: `node --env-file=.env` ou variável no shell.
 export default defineConfig({
-  schema: 'prisma/schema.prisma',
+  schema: 'banco-de-dados/schema.prisma',
   migrations: {
-    path: 'prisma/migrations',
-    seed: 'tsx prisma/seed.ts',
+    path: 'banco-de-dados/migrations',
+    seed: 'tsx banco-de-dados/popular.ts',
   },
   datasource: {
-    url: process.env.DATABASE_URL ?? 'file:./prisma/dev.db',
+    url: process.env.DATABASE_URL ?? 'file:./banco-de-dados/dev.db',
   },
 });

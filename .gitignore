@@ -1,9 +1,10 @@
 AGENTS.md
 opencode.json
 
-# Node
+# Node / Build
 node_modules/
 dist/
+compilado/
 *.log
 
 # Ambiente e segredos
@@ -15,16 +16,18 @@ dist/
 *.db
 *.db-journal
 *.sqlite
-prisma/dev.db*
-tests/.tmp/
+prisma/
+banco-de-dados/dev.db*
+testes/.tmp/
 
 # Artefatos de build (gerados por `npm run build`)
 src/generated/
-public/css/app.css
-public/js/app.js
-public/js/tema-inicial.js
-public/js/paleta-escura.js
-public/js/htmx.min.js
+codigo-fonte/gerado/
+arquivos-publicos/css/app.css
+arquivos-publicos/js/app.js
+arquivos-publicos/js/tema-inicial.js
+arquivos-publicos/js/paleta-escura.js
+arquivos-publicos/js/htmx.min.js
 
 # Relatórios locais de segurança
 relatorios ataques/

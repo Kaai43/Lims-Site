@@ -7,9 +7,9 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
-    "rootDir": "src/client",
-    "outDir": "public/js",
+    "rootDir": "codigo-fonte/navegador",
+    "outDir": "arquivos-publicos/js",
     "types": []
   },
-  "include": ["src/client/**/*.ts"]
+  "include": ["codigo-fonte/navegador/**/*.ts"]
 }

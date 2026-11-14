@@ -9,19 +9,19 @@
     "node": ">=24"
   },
   "scripts": {
-    "dev": "npm run build:assets && tsx watch --env-file-if-exists=.env src/server.ts",
-    "dev:css": "tailwindcss -i src/styles/app.css -o public/css/app.css --watch",
+    "dev": "prisma generate && npm run build:assets && tsx watch --env-file-if-exists=.env codigo-fonte/servidor.ts",
+    "dev:css": "tailwindcss -i codigo-fonte/estilos/app.css -o arquivos-publicos/css/app.css --watch",
     "build": "prisma generate && tsc -p tsconfig.build.json && npm run build:assets",
     "build:assets": "npm run build:css && npm run build:client && npm run build:htmx",
-    "build:css": "tailwindcss -i src/styles/app.css -o public/css/app.css --minify",
+    "build:css": "tailwindcss -i codigo-fonte/estilos/app.css -o arquivos-publicos/css/app.css --minify",
     "build:client": "tsc -p tsconfig.client.json",
-    "build:htmx": "node -e \"require('node:fs').copyFileSync('node_modules/htmx.org/dist/htmx.min.js','public/js/htmx.min.js')\"",
-    "start": "node dist/server.js",
-    "test": "node --import tsx --test --test-concurrency=1 \"tests/**/*.test.ts\"",
+    "build:htmx": "node -e \"require('node:fs').copyFileSync('node_modules/htmx.org/dist/htmx.min.js','arquivos-publicos/js/htmx.min.js')\"",
+    "start": "node compilado/servidor.js",
+    "test": "node --import tsx --test --test-concurrency=1 \"testes/**/*.test.ts\"",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.client.json",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "prisma generate && tsx banco-de-dados/popular.ts"
   },
   "dependencies": {
     "@fastify/cookie": "11.1.5",
